@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <header class="page-header">
+        <div >
+            <h1 style="float: left;">Welcome to our shop</h1>
+            <img style="float: right; width: 60px; height: 60px;" src="bucket.png" alt="bucket">
+        </div>
+    </header>
+    <main class="page-body">
+        <div class="side-nav" style="float: left;">
+            <a href="addPage.html">Add Item</a>
+        </div>
+    <form action="/form/submit" method="GET or POST" >
+        <label for="pname">Product</label>
+        <input type="text" name="NameOfProduct" id="pname" /><br/><br/>
+        <label for="pdescription">Description</label>
+        <input type="text" name="Description"id="pdescription" /><br/><br/>
+        <label for="pprice">Price</label>
+        <input type="text" name="Price"id="pprice" /><br/><br/>
+        <label for="pprice">Price</label>
+        <input type="file" name="Picture" id="picture"/><br/>
+        <input type="submit" value="Submit"/>
+        <input type="reset" value="Reset">
+      </form>
+      </main>
+</body>
+</html>
