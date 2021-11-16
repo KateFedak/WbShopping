@@ -1,99 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>Document</title>
-</head>
-
-<body>
-  <header >
-    <div>
-      <h1>Welcome to our shop</h1>
-      <a href="bucket.html">
-        <img src="bucket.png" alt="bucket" />
-        <label style="float: right;" id="countOfProducts"></label>
-      </a>
-    </div>
-  </header>
-  <main class="page-body">
-    <div class="side-nav">
-      <a href="addPage.html" >Add Item</a>
-      <a href="index.html"> All</a>
-      <a href="index.html?filter=phone"> Phone</a>
-      <a href="index.html?filter=laptop"> Laptop</a>
-    </div>
-    <div class="container-items">
-    </div>
-  </main>
-  <footer>
-    <hr />
-    <p>Company © WebShop</p>
-  </footer>
-  <script>
-    function doShowAll() {
-      let keys = Object.keys(localStorage);
-      let params = (new URL(document.location)).searchParams;
-       let filter = params.get('filter');
-        keys.forEach(it => {
-        let items = JSON.parse(localStorage.getItem(it));
-        items.filter(item =>!filter||item.category == filter).forEach(item => {
-          let element = document.createElement('div');
-          element.classList.add('item');
-          let img = document.createElement('img');
-          img.style.height = "200px";
-          img.style.width = "200px";
-          img.src = item.img;
-          let name = document.createElement('h3');
-          name.textContent = item.name;
-          let category = document.createElement('h4');
-          category.textContent = item.category;
-          let price = document.createElement('h5');
-          price.textContent = item.price;
-          let button = document.createElement('button');
-          button.setAttribute("id", it);
-          button.addEventListener("click", (event) => {
-            AddToBucket(event);
-          });
-          if (sessionStorage[it] == null) {
-            button.textContent = "ADD";
-          } else {
-            button.textContent = "ADDED";
-          }
-          button.style.height = "20px";
-          button.style.width = "70px";
-          button.classList.add('add-button');
-          element.appendChild(img);
-          element.appendChild(name);
-          element.appendChild(category);
-          element.appendChild(price);
-          element.appendChild(button);
-          document.querySelector('.container-items').appendChild(element);
+  <body>
+    <header>
+      <div>
+        <h1>Welcome to our shop</h1>
+        <a href="bucket.html">
+          <img src="bucket.png" alt="bucket" />
+          <label style="float: right" id="countOfProducts"></label>
+        </a>
+      </div>
+    </header>
+    <main class="page-body">
+      <div class="side-nav">
+        <a href="addPage.html">Add Item</a>
+        <a href="index.html"> All</a>
+        <a href="index.html?filter=phone"> Phone</a>
+        <a href="index.html?filter=laptop"> Laptop</a>
+      </div>
+      <div class="container-items"></div>
+    </main>
+    <footer>
+      <hr />
+      <p>Company © WebShop</p>
+    </footer>
+    <script>
+      function doShowAll() {
+        InsertProduct();
+        let keys = Object.keys(localStorage);
+        let params = new URL(document.location).searchParams;
+        let filter = params.get("filter");
+        keys.forEach((it) => {
+          let items = JSON.parse(localStorage.getItem(it));
+          items
+            .filter((item) => !filter || item.category == filter)
+            .forEach((item) => {
+              let element = document.createElement("div");
+              element.classList.add("item");
+              let img = document.createElement("img");
+              img.style.height = "200px";
+              img.style.width = "200px";
+              img.src = item.img;
+              let name = document.createElement("h3");
+              name.textContent = item.name;
+              let category = document.createElement("h4");
+              category.textContent = item.category;
+              let price = document.createElement("h5");
+              price.textContent = item.price;
+              let button = document.createElement("button");
+              button.setAttribute("id", it);
+              button.addEventListener("click", (event) => {
+                AddToBucket(event);
+              });
+              if (sessionStorage[it] == null) {
+                button.textContent = "ADD";
+              } else {
+                button.textContent = "ADDED";
+              }
+              button.style.height = "20px";
+              button.style.width = "70px";
+              button.classList.add("add-button");
+              element.appendChild(img);
+              element.appendChild(name);
+              element.appendChild(category);
+              element.appendChild(price);
+              element.appendChild(button);
+              document.querySelector(".container-items").appendChild(element);
+            });
         });
-      });
+      }
 
-    }
-
-    function AddToBucket() {
-      let id = event.target.getAttribute("id");
-      document.getElementById(id).textContent = "ADDED";
-      let product = localStorage.getItem(id);
-      sessionStorage.setItem(id, product);
-      document.getElementById('countOfProducts').textContent=sessionStorage.length-1;
-
-    }
-    window.onload = function(){
-      document.getElementById('countOfProducts').textContent=sessionStorage.length-1;
-      doShowAll();
-};
-    function InsertProduct() {
-      localStorage.setItem("1", JSON.stringify([{ name: "IPhone 8", img: "iphone8.png", category: "phone", price: 1200 }]));
-      localStorage.setItem("2", JSON.stringify([{ name: "IPhone 10", img: "iphone10.jpg", category: "phone", price: 1200 }]));
-    }
-  </script>
-</body>
-
+      function AddToBucket() {
+        let id = event.target.getAttribute("id");
+        document.getElementById(id).textContent = "ADDED";
+        let product = localStorage.getItem(id);
+        sessionStorage.setItem(id, product);
+        document.getElementById("countOfProducts").textContent =
+          sessionStorage.length - 1;
+      }
+      window.onload = function () {
+        document.getElementById("countOfProducts").textContent =
+          sessionStorage.length - 1;
+        doShowAll();
+      };
+      function InsertProduct() {
+        localStorage.setItem(
+          "1",
+          JSON.stringify([
+            {
+              name: "IPhone 8",
+              img: "iphone8.png",
+              category: "phone",
+              price: 1200,
+            },
+          ])
+        );
+        localStorage.setItem(
+          "2",
+          JSON.stringify([
+            {
+              name: "IPhone 10",
+              img: "iphone10.jpg",
+              category: "phone",
+              price: 1350,
+            },
+          ])
+        );
+        localStorage.setItem(
+          "3",
+          JSON.stringify([
+            {
+              name: "MacBook Pro",
+              img: "laptop.png",
+              category: "laptop",
+              price: 22800,
+            },
+          ])
+        );
+        localStorage.setItem(
+          "4",
+          JSON.stringify([
+            {
+              name: "MacBook Air",
+              img: "laptop.png",
+              category: "laptop",
+              price: 18500,
+            },
+          ])
+        );
+        localStorage.setItem(
+          "5",
+          JSON.stringify([
+            {
+              name: "IPhone 7",
+              img: "iphone7.png",
+              category: "phone",
+              price: 750,
+            },
+          ])
+        );
+      }
+    </script>
+  </body>
 </html>

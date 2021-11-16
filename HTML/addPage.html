@@ -23,7 +23,7 @@
         <a href="index.html"> All</a>
       </div>
       <div style="display: flex; flex-wrap: wrap">
-        <form  id="formId">
+        <form id="formId">
           <label for="pname">Product</label>
           <input type="text" name="NameOfProduct" id="pname" /><br /><br />
           <label for="pdescription">Description</label>
@@ -39,15 +39,26 @@
     </main>
     <script>
       var form = document.getElementById("formId");
-document.getElementById("addProduct").addEventListener("click", function () {
-  form.submit();
-  let nameProduct = document.getElementById('pname').value;
-  let categoryProduct=document.getElementById('pdescription').value;
-  let priceProduct=document.getElementById('pprice').value;
-  let imgProduct=document.getElementById('picture').value;
-  localStorage.setItem(localStorage.length+1, JSON.stringify([{ name: nameProduct, img: imgProduct, category: categoryProduct, price: priceProduct }]));
-});
-
+      document
+        .getElementById("addProduct")
+        .addEventListener("click", function () {
+          form.submit();
+          let nameProduct = document.getElementById("pname").value;
+          let categoryProduct = document.getElementById("pdescription").value;
+          let priceProduct = document.getElementById("pprice").value;
+          let imgProduct = document.getElementById("picture").value;
+          localStorage.setItem(
+            localStorage.length + 1,
+            JSON.stringify([
+              {
+                name: nameProduct,
+                img: imgProduct,
+                category: categoryProduct,
+                price: priceProduct,
+              },
+            ])
+          );
+        });
     </script>
   </body>
 </html>
