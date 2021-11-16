@@ -92,23 +92,13 @@ header img {
   font-size: 18px;
   font-weight: 400;
 }
-.shopping-cart button[class*="btn"] {
-  width: 30px;
-  height: 30px;
-  background-color: #e1e8ee;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
 .shopping-cart input[type="text"] {
   width: 30px;
   height: 30px;
 }
 .shopping-cart .item-bucket {
   padding: 10px 10px;
-  height: 40px;
   display: flex;
-  margin: 10px;
 }
 .shopping-cart .delete-btn {
   width: 18px;
@@ -120,8 +110,6 @@ header img {
 }
 .shopping-cart img {
   margin-right: 10px;
-  width: 60px;
-  height: 60px;
 }
 .shopping-cart button[class*="btn"] {
   width: 30px;
@@ -131,10 +119,15 @@ header img {
   border: none;
   margin: 10px;
 }
+.shopping-cart .backet-quantity {
+  padding-top: 60px;
+  margin: 30px;
+}
 .shopping-cart .total-price {
-  width: 83px;
+  width: 100px;
   text-align: center;
   font-size: 16px;
   color: #43484d;
   font-weight: 300;
+  padding-top: 100px;
 }
