@@ -9,12 +9,13 @@
   <title>Document</title>
 </head>
 
-<body onload="doShowAll()">
-  <header>
+<body>
+  <header >
     <div>
       <h1>Welcome to our shop</h1>
       <a href="bucket.html">
         <img src="bucket.png" alt="bucket" />
+        <label style="float: right;" id="countOfProducts"></label>
       </a>
     </div>
   </header>
@@ -81,8 +82,13 @@
       document.getElementById(id).textContent = "ADDED";
       let product = localStorage.getItem(id);
       sessionStorage.setItem(id, product);
-    }
+      document.getElementById('countOfProducts').textContent=sessionStorage.length-1;
 
+    }
+    window.onload = function(){
+      document.getElementById('countOfProducts').textContent=sessionStorage.length-1;
+      doShowAll();
+};
     function InsertProduct() {
       localStorage.setItem("1", JSON.stringify([{ name: "IPhone 8", img: "iphone8.png", category: "phone", price: 1200 }]));
       localStorage.setItem("2", JSON.stringify([{ name: "IPhone 10", img: "iphone10.jpg", category: "phone", price: 1200 }]));
