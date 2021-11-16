@@ -9,7 +9,7 @@
   <title>Bucket</title>
 </head>
 
-<body>
+<body onload="doShowBucket()">
   <header>
     <div>
       <h1>Welcome to our shop</h1>
@@ -24,71 +24,60 @@
     <div class="shopping-cart">
       <div class="title">Shopping Bag</div>
       <div class="item-bucket">
-        <span class="delete-btn"></span>
-        <img src="https://via.placeholder.com/250x220/FFB6C1/000000" alt="" />
-        <div>
-          <h4>The name of Product</h4>
-          <p >teutu</p>
-        </div>
-          <div class="backet-quantity">
-            <button class="plus-btn" type="button" name="button">+</button>
-            <input type="text" name="name" value="1" />
+   <!--     <div class="backet-quantity">
+         <button class="plus-btn" type="button" name="button">+</button>
+          <input type="text" name="name" value="1" />
             <button class="minus-btn" type="button" name="button">-</button>
-        </div>
-        <div class="total-price">
-        $549
-        </div>
-      </div>
-      <div class="item-bucket">
-        <span class="delete-btn"></span>
-        <img src="https://via.placeholder.com/250x220/FFB6C1/000000" alt="" />
-        <div>
-          <h4>The name of Product</h4>
-          <p >teutu</p>
-        </div>
-          <div class="backet-quantity">
-            <button class="plus-btn" type="button" name="button">+</button>
-            <input type="text" name="name" value="1" />
-            <button class="minus-btn" type="button" name="button">-</button>
-        </div>
-        <div class="total-price">
-        $549
-        </div>
-      </div>
-      <div class="item-bucket">
-        <span class="delete-btn"></span>
-        <img src="https://via.placeholder.com/250x220/FFB6C1/000000" alt="" />
-        <div>
-          <h4>The name of Product</h4>
-          <p >teutu</p>
-        </div>
-          <div class="backet-quantity">
-            <button class="plus-btn" type="button" name="button">+</button>
-            <input type="text" name="name" value="1" />
-            <button class="minus-btn" type="button" name="button">-</button>
-        </div>
-        <div class="total-price">
-        $549
-        </div>
-      </div>
-      <div class="item-bucket">
-        <span class="delete-btn"></span>
-        <img src="https://via.placeholder.com/250x220/FFB6C1/000000" alt="" />
-        <div>
-          <h4>The name of Product</h4>
-          <p >teutu</p>
-        </div>
-          <div class="backet-quantity">
-            <button class="plus-btn" type="button" name="button">+</button>
-            <input type="text" name="name" value="1" />
-            <button class="minus-btn" type="button" name="button">-</button>
-        </div>
-        <div class="total-price">
-        $549
-        </div>
+       </div>-->
       </div>
     </div>
   </main>
+  <script>
+   function doShowBucket(){
+    let keys = Object.keys(sessionStorage);
+      keys.forEach(it=> {
+        if(it!='IsThisFirstTime_Log_From_LiveServer'){
+        let items=JSON.parse(sessionStorage.getItem(it));
+        items.forEach(item =>{
+        let element = document.createElement('div');
+        element.classList.add('item-bucket');
+        element.setAttribute("id", it);
+        let deleteSpan=document.createElement('span');
+        deleteSpan.classList.add('delete-btn');
+        deleteSpan.setAttribute("id", it);
+        deleteSpan.addEventListener("click", (event) => {
+            RemoveFromBucket(event);
+          });
+        let img = document.createElement('img');
+        img.style.height = "200px";
+        img.style.width = "200px";
+        img.src = item.img;
+        let name = document.createElement('h3');
+        name.textContent = item.name;
+        let category = document.createElement('h4');
+        category.textContent = item.category;
+        let divInfo = document.createElement('div');
+        divInfo.appendChild(name);
+        divInfo.appendChild(category);
+        let price = document.createElement('h5');
+        price.textContent = item.price;
+        let divPrice=document.createElement('div');
+        divPrice.classList.add('total-price');
+        divPrice.appendChild(price);
+        element.appendChild(deleteSpan);
+        element.appendChild(img);
+        element.appendChild(divInfo);
+        element.appendChild(divPrice);
+        document.querySelector('.item-bucket').appendChild(element);
+        });}
+      });
+   }
+   function RemoveFromBucket(){
+    let id = event.target.getAttribute("id");
+     sessionStorage.removeItem(id);
+     document.getElementById(id).style="display: none";
+   }
+  </script>
 </body>
 
 </html>

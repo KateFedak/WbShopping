@@ -23,7 +23,7 @@
         <a href="index.html"> All</a>
       </div>
       <div style="display: flex; flex-wrap: wrap">
-        <form action="/form/submit" method="GET or POST">
+        <form  id="formId">
           <label for="pname">Product</label>
           <input type="text" name="NameOfProduct" id="pname" /><br /><br />
           <label for="pdescription">Description</label>
@@ -31,11 +31,23 @@
           <label for="pprice">Price</label>
           <input type="text" name="Price" id="pprice" /><br /><br />
           <label for="pprice">Picture</label>
-          <input type="file" name="Picture" id="picture" /><br />
-          <input type="submit" value="Submit" />
+          <input type="text" name="Picture" id="picture" /><br />
+          <input type="submit" id="addProduct" value="Submit" />
           <input type="reset" value="Reset" />
         </form>
       </div>
     </main>
+    <script>
+      var form = document.getElementById("formId");
+document.getElementById("addProduct").addEventListener("click", function () {
+  form.submit();
+  let nameProduct = document.getElementById('pname').value;
+  let categoryProduct=document.getElementById('pdescription').value;
+  let priceProduct=document.getElementById('pprice').value;
+  let imgProduct=document.getElementById('picture').value;
+  localStorage.setItem(localStorage.length+1, JSON.stringify([{ name: nameProduct, img: imgProduct, category: categoryProduct, price: priceProduct }]));
+});
+
+    </script>
   </body>
 </html>
